@@ -22,6 +22,11 @@ function rewriteCssPaths() {
           let content = readFileSync(filePath, 'utf8');
           content = content.replace(/\/assets\//g, '/static/assets/');
           writeFileSync(filePath, content);
+        } else if (file.endsWith('.js')) {
+          const filePath = path.join(assetsDir, file);
+          let content = readFileSync(filePath, 'utf8');
+          content = content.replace(/\/images\//g, '/static/images/');
+          writeFileSync(filePath, content);
         }
       });
     }
