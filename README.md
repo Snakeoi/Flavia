@@ -1,8 +1,22 @@
 # Flavia
 
-Disclaimer: This project is in progress! Lots of functionalities doesn't work yet. But, im open for your opinion.
+**Disclaimer**: This project is in progress! Lots of functionalities doesn't work yet.
+Lack of tests, and probably a lot of trash :) I'm open for your opinion, but have it on your mind.
 
-Flavia is a boilerplate combining Flask and Vue, offering a ready-to-use system for authentication, user management, and permissions. The goal of the project is to provide a solid foundation for building web applications without starting from scratch.
+This boilerplate is the perfect starting point for your web project! 
+It combines the power of Flask with the flexibility of Vue.js in a lightweight, 
+easy-to-understand structure. Designed to help you launch your application quickly, 
+it comes with built-in features to save you time and effort.
+
+## Why use it?
+- **Easy Customization** – The project is fully editable, allowing you to adapt it to your specific needs with minimal effort.
+- **Prebuilt Features** – With built-in login, user management, and Vue.js integration, you can focus on building your app’s unique functionality.
+- **Flexibility** – Your project, your rules. You can expand and modify your version as much as you like or even create something entirely new.
+
+## How can I help?
+This boilerplate is continuously evolving, and your feedback and ideas are always welcome! 
+If you have questions, suggestions, or have found something to improve, 
+feel free to open an issue or submit a pull request.
 
 ## Features
 
