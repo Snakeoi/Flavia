@@ -43,40 +43,46 @@ Flavia is a boilerplate combining Flask and Vue, offering a ready-to-use system 
 
 ## Installation
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/your-repo/flavia.git
-   cd flavia
-   ```
+### Clone the repository
+```bash
+git clone https://github.com/your-repo/flavia.git
+cd flavia
+```
 
-2. **Install backend dependencies:**
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   pip install -r requirements.txt
-   ```
+### Install backend dependencies
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-3. **Install frontend dependencies:**
-   ```bash
-   cd frontend
-   npm install
-   npm run build
-   cd ..
-   ```
+### Install frontend dependencies
+Frontend files will be build into `application/static/assets`.
+```bash
+cd frontend
+npm install
+npm run build
+cd ..
+```
+You can use `npm run dev` to run development server. 
+Development server will communicate backend at specified endpoints.
+Check `frontend/vite.config.js` server settings for more details.
+This should reflect behavior of backend.
 
-4. **Configure the database:**
-   - Create a `.env` file based on `.env.example` and fill in the database details.
-   - Initialize the database:
-     ```bash
-     flask db init
-     flask db migrate
-     flask db upgrade
-     ```
+### Configure the database
+- Create a `.env` file based on `.env.example` and fill in the database details.
+- Optionally, remove migrations from the project made by author. 
+- Initialize the database:
+  ```bash
+  flask db init
+  flask db migrate
+  flask db upgrade
+  ```
 
-5. **Run the application:**
-   ```bash
-   flask run
-   ```
+### Run the application
+```bash
+flask run
+```
 
 ## Project Structure
 
@@ -89,11 +95,6 @@ flavia/
 ├── requirements.txt    # Python dependencies
 └── README.md           # Documentation
 ```
-
-## Future Enhancements
-- API for communication between frontend and backend.
-- Additional views for more complex applications.
-- Integration with external services (e.g., Stripe, AWS S3).
 
 ## License
 The Flavia project is available under the MIT license.
