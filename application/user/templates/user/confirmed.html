@@ -1,0 +1,29 @@
+{% extends 'user/auth_layout.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block form %}
+    <header class="card-header">
+        <p class="card-header-title">Register Confirmation</p>
+    </header>
+    <div class="card-content">
+        {% if success %}
+        <div class="notification is-primary">
+            <h1 class="title">Confirmed :)</h1>
+            Account is confirmed!
+        </div>
+        {% else %}
+        <div class="notification is-warning">
+            <h1 class="title">Account not confirmed <i class="icon-frown-o"></i> </h1>
+            Token has expired or is invalid.
+        </div>
+        {% endif %}
+    </div>
+    <footer class="card-footer">
+        <p class="card-footer-item">
+            <span>
+                Go to <a href="{{ url_for('user_auth.login') }}">Login</a>
+            </span>
+        </p>
+    </footer>
+{% endblock %}

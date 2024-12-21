@@ -1,0 +1,9 @@
+<p>Hello, {{ user.username }}</p>
+
+<p>To confirm your account, please click link below</p>
+
+<a href="{{ url_for('user_auth.confirm', token=user.generate_confirmation_token(), _external=True) }}">
+    Confirm
+</a>
+
+

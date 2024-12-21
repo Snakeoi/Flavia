@@ -1,0 +1,65 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="Eslint" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="24">
+            <item index="0" class="java.lang.String" itemvalue="week_num" />
+            <item index="1" class="java.lang.String" itemvalue="today" />
+            <item index="2" class="java.lang.String" itemvalue="employee" />
+            <item index="3" class="java.lang.String" itemvalue="employee_id" />
+            <item index="4" class="java.lang.String" itemvalue="salon_id" />
+            <item index="5" class="java.lang.String" itemvalue="real_type" />
+            <item index="6" class="java.lang.String" itemvalue="accordion_group" />
+            <item index="7" class="java.lang.String" itemvalue="@change" />
+            <item index="8" class="java.lang.String" itemvalue="v-model" />
+            <item index="9" class="java.lang.String" itemvalue="v-if" />
+            <item index="10" class="java.lang.String" itemvalue=":type" />
+            <item index="11" class="java.lang.String" itemvalue="@input" />
+            <item index="12" class="java.lang.String" itemvalue="v-else" />
+            <item index="13" class="java.lang.String" itemvalue="@click" />
+            <item index="14" class="java.lang.String" itemvalue=":class" />
+            <item index="15" class="java.lang.String" itemvalue="v-for" />
+            <item index="16" class="java.lang.String" itemvalue=":key" />
+            <item index="17" class="java.lang.String" itemvalue=":rowspan" />
+            <item index="18" class="java.lang.String" itemvalue="v-else-if" />
+            <item index="19" class="java.lang.String" itemvalue=":disabled" />
+            <item index="20" class="java.lang.String" itemvalue=":value" />
+            <item index="21" class="java.lang.String" itemvalue=":max" />
+            <item index="22" class="java.lang.String" itemvalue=":min" />
+            <item index="23" class="java.lang.String" itemvalue=":id" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="7">
+            <item index="0" class="java.lang.String" itemvalue="nobr" />
+            <item index="1" class="java.lang.String" itemvalue="noembed" />
+            <item index="2" class="java.lang.String" itemvalue="comment" />
+            <item index="3" class="java.lang.String" itemvalue="noscript" />
+            <item index="4" class="java.lang.String" itemvalue="embed" />
+            <item index="5" class="java.lang.String" itemvalue="script" />
+            <item index="6" class="java.lang.String" itemvalue="conditional-spinner" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="2">
+            <item index="0" class="java.lang.String" itemvalue="typing_extensions" />
+            <item index="1" class="java.lang.String" itemvalue="greenlet" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

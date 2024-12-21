@@ -1,0 +1,21 @@
+{% with messages = get_flashed_messages(with_categories=true) %}
+    <div id="flashes">
+    {% if messages %}
+            {% for category, message in messages %}
+                <div class="notification  is-{{ category }}">
+                    <button type="button" class="delete" aria-label="Close"
+                            onclick="hideFlashMsg(this)"></button>
+                    {{ message }}
+                </div>
+            {% endfor %}
+    {% endif %}
+    </div>
+{% endwith %}
+
+<script>
+function hideFlashMsg(element) {
+    const parentDiv = element.parentNode;
+    const parentMsg = parentDiv.parentNode;
+    parentMsg.style.display = 'none';
+}
+</script>
