@@ -35,6 +35,9 @@ onBeforeMount(async () => {
   await readResource('/user/permission-codes', response => {
     permissions.value = response.data;
   });
+  await readResource('/user/schema/update', response => {
+    updateSchema.value = response.data;
+  })
   isLoading.value = false;
 })
 
@@ -95,11 +98,19 @@ const sendConfirmationEmail = async () => {
           <div class="field">
             <div class="field mb-3">
               <label class="label">Name</label>
-              <Input v-model="user.username" icon-left="icon-user"/>
+              <Input
+                  v-model="user.username"
+                  icon-left="icon-user"
+                  :validators="updateSchema?.username.validators"
+              />
             </div>
             <div class="field mb-3">
               <label class="label">Email</label>
-              <Input v-model="user.email" icon-left="icon-envelope"/>
+              <Input
+                  v-model="user.email"
+                  icon-left="icon-envelope"
+                  :validators="updateSchema?.email.validators"
+              />
             </div>
           </div>
           <div class="field">

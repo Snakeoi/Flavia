@@ -43,6 +43,12 @@ class UsersView(views.MethodView, PermissionsSetupHandler):
 
     def post(self):
         data: dict = UserCreateSchema().load(request.get_json())
+
+        if User.query.filter_by(email=data['email'].lower()).first():
+            return jsonify({"errors": [
+                    "Email already in use."
+            ]}), 400
+
         user: "User" = User(
             email=data['email'].lower(),
             username=data['username'].strip(),

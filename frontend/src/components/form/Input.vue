@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue';
+import Validators from "@/components/form/validators/Validators.vue";
 
-// Definiowanie właściwości (props)
 const props = defineProps({
   modelValue: {
     type: String,
@@ -19,11 +19,23 @@ const props = defineProps({
   class: {
     type: String,
   },
+  type: {
+    type: String,
+    default: 'text',
+  },
+  validators: {
+    type: Array,
+    default: {},
+  }
 });
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits([
+    'update:modelValue',
+    'update:isValid',
+]);
 
 const inputValue = ref(props.modelValue);
+const isValid = ref(true);
 
 watch(() => props.modelValue, (newValue) => {
   inputValue.value = newValue;
@@ -31,6 +43,11 @@ watch(() => props.modelValue, (newValue) => {
 
 function updateValue(event) {
   emit('update:modelValue', event.target.value);
+}
+
+const setValidity = (value) => {
+  isValid.value = value;
+  emit('update:isValid', value);
 }
 </script>
 
@@ -41,6 +58,7 @@ function updateValue(event) {
         class="input"
         :class="props.class"
         @input="updateValue"
+        :type="props.type"
     />
     <span v-if="iconLeft" class="icon is-small is-left">
       <i :class="iconLeft"></i>
@@ -49,8 +67,8 @@ function updateValue(event) {
       <i :class="iconRight"></i>
     </span>
   </div>
+  <Validators :validators="props.validators" :inputValue="inputValue" @update:isValid="setValidity"/>
 </template>
 
 <style scoped>
-/* Dodatkowe style jeśli potrzebne */
 </style>

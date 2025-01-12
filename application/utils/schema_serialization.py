@@ -133,6 +133,7 @@ def serialize_schema(schema: Schema):
                 validators = serialize_requirements(value.validate)
 
             result[key] = {
+                "name": key,
                 "type": serialize_field_type(value),
                 "required": value.required,
                 "validators": validators,

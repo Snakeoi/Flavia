@@ -1,5 +1,6 @@
 <script setup>
 import {computed, ref, watch} from 'vue';
+import Validators from "@/components/form/validators/Validators.vue";
 
 const props = defineProps({
   modelValue: {
@@ -13,16 +14,22 @@ const props = defineProps({
   displayPassword: {
     type: Boolean,
     default: false
+  },
+  validators: {
+    type: Object,
+    default: {}
   }
 });
 
 const emit = defineEmits([
     'update:modelValue',
     'update:displayPassword',
+    'update:isValid',
 ]);
 
 const inputValue = ref(props.modelValue);
 const displayPassword = ref(props.displayPassword);
+const isValid = ref(true);
 
 watch(() => props.modelValue, (newValue) => {
   inputValue.value = newValue;
@@ -39,6 +46,11 @@ const updateValue = (event) => {
 const switchDisplayPassword = () => {
   displayPassword.value = !displayPassword.value
   emit('update:displayPassword', displayPassword.value);
+}
+
+const setValidity = (value) => {
+  isValid.value = value;
+  emit('update:isValid', value);
 }
 
 const type = computed(() => {
@@ -66,6 +78,7 @@ const type = computed(() => {
       <i class="has-text-link" :class="{'icon-eye': !displayPassword, 'icon-eye-slash': displayPassword}"></i>
     </span>
   </div>
+  <Validators :validators="validators" :inputValue="modelValue" @update:isValid="setValidity"/>
 </template>
 
 <style scoped>

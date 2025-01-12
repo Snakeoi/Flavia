@@ -68,25 +68,31 @@ const saveUser = async () => {
 <template>
   <ConditionalLoader :is-loading="isLoading">
 
-
-
       <div class="field is-horizontal">
         <div class="field-body">
           <div class="field">
             <div class="field mb-3">
               <label class="label">Name</label>
-              <Input v-model="user.username" icon-left="icon-user"/>
+              <Input
+                  v-model="user.username"
+                  icon-left="icon-user"
+                  :validators="createSchema?.username.validators"
+              />
             </div>
             <div class="field mb-3">
               <label class="label">Email</label>
-              <Input v-model="user.email" icon-left="icon-envelope"/>
+              <Input
+                  v-model="user.email"
+                  type="email"
+                  icon-left="icon-envelope"
+                  :validators="createSchema?.email.validators"
+              />
             </div>
             <div class="field mb-3">
               <label class="label">Password</label>
               <GeneratePasswordInput
                   v-model="user.password"
-                  :regex="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/"
-                  :length="16"
+                  :validators="createSchema?.password.validators"
               />
             </div>
             <div class="field">
