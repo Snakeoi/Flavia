@@ -26,7 +26,7 @@ class LoginView(views.MethodView):
                         category='warning'
                     )
                     send_confirmation_email(email=user.email)
-                if not user.is_active:
+                elif not user.is_active:
                     flash(
                         'Your account has been deactivated.',
                         category='danger'
