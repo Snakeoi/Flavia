@@ -45,8 +45,7 @@ class RegisterView(views.MethodView):
                 user = User(
                     email=form.email.data.lower(),
                     username=form.username.data.strip(),
-                    password=form.password.data,
-                    is_active=False
+                    password=form.password.data
                 )
                 db.session.add(user)
                 db.session.commit()
