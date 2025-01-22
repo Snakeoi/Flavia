@@ -23,7 +23,6 @@ def permission_required_api(*permissions: str):
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
-            print(current_user, func.__name__)
             if isinstance(current_user, AnonymousUserMixin):
                 abort(401)
             else:
