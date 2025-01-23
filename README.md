@@ -49,6 +49,11 @@ feel free to open an issue or submit a pull request.
   - Login and registration pages.
   - Admin panel for managing users and roles.
 
+### Additional
+- **Cookie consent**
+  - A script that displays a cookie consent message as required by EU regulation (GDPR).
+  - Check authors GitHub page [here](https://github.com/brainsum/cookieconsent) for manuals and more.
+
 ## Requirements
 
 - **Python 3.8+**
