@@ -6,9 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename=css_file_path) }}">
+    <script src="{{ url_for('static', filename='vendor/cookieconsent/cookieconsent.min.js') }}"></script>
     {% block head %}{% endblock %}
 </head>
 <body>
 {% block content %}{% endblock %}
+
+{% include 'elements/cookieconsent.html' %}
 </body>
 </html>
