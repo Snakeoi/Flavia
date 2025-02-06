@@ -72,7 +72,7 @@ class SendConfirmationEmailView(views.MethodView):
     ]
 
     def post(self, user_id: int):
-        user: "User" = User.query.get(user_id)
+        user: "User" = User.query.get_one(user_id)
         if not user.confirmed:
             send_confirmation_email(user=user)
             return jsonify(), 202

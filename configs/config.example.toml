@@ -1,0 +1,12 @@
+SECRET_KEY = 'v3rysecret'
+JWT_SECRET_KEY = 'v3rysecret'
+
+SQLALCHEMY_DATABASE_URI = "mariadb+pymysql://DB_USER:DB_PASSWORD@localhost/DB_NAME"
+
+MAIL_USERNAME = 'flavia@example.com'
+MAIL_SERVER = 'mail.example.com'
+MAIL_PORT = 587
+MAIL_PASSWORD = 'password'
+MAIL_USE_TLS = false
+
+EVERYONE_CAN_REGISTER = true

@@ -91,7 +91,7 @@ def run_migrations_online():
                 logger.info('No changes in schema detected.')
 
     conf_args = current_app.extensions['migrate'].configure_args
-    if conf_args.get("process_revision_directives") is None:
+    if conf_args.get_one("process_revision_directives") is None:
         conf_args["process_revision_directives"] = process_revision_directives
 
     connectable = get_engine()

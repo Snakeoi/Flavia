@@ -36,7 +36,7 @@ MANIFEST
 pip-log.txt
 pip-delete-this-directory.txt
 
-# Unit test / coverage reports
+# Unit tests / coverage reports
 htmlcov/
 .tox/
 .nox/
@@ -62,7 +62,7 @@ db.sqlite3
 db.sqlite3-journal
 
 # Flask stuff:
-instance/
+application/instance/
 .webassets-cache
 
 # Scrapy stuff:
@@ -120,7 +120,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
+configs/config.example.toml
 .venv
 env/
 venv/
@@ -161,3 +161,5 @@ cython_debug/
 /.idea/
 
 application/static/assets/*
+configs/*.toml
+!configs/config.example.toml

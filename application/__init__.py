@@ -1,6 +1,6 @@
 import os
+import tomllib
 
-from dotenv import load_dotenv
 from flask import Flask
 
 from .config import assignment
@@ -10,15 +10,22 @@ from .blueprints import setup_blueprints
 from . import utils
 from .middleware import update_user_last_seen
 
-load_dotenv()
+CONFIGS = {
+    "basic": "config.toml",
+    "testing": "config.test.toml"
+}
 
-
-def create_app():
+def create_app(mode='basic'):
 
     app = Flask(__name__)
-    app.config.from_object(
-        assignment[os.environ.get('MODE', 'production')]
+
+    app.config.from_file(
+        f'../configs/{CONFIGS[mode]}',
+        load=tomllib.load,
+        text=False
     )
+
+    app.config['BASEDIR'] = os.path.abspath(os.path.dirname(__file__))
 
     setup_extensions(app)
 

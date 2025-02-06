@@ -135,5 +135,13 @@ class User(UserMixin, db.Model):
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    return User.query.filter_by(id=int(user_id)).first()
 
+class Agreement(db.Model):
+    __tablename__ = 'agreements'
+    id = db.Column(db.Integer, primary_key=True)
+    slug = db.Column(db.String(64), unique=True, nullable=False)
+    name = db.Column(db.String(64), nullable=False)
+    description = db.Column(db.Text)
+    created_at = db.Column(db.DateTime(), default=datetime.now)
+    updated_at = db.Column(db.DateTime(), default=datetime.now, onupdate=datetime.now)
