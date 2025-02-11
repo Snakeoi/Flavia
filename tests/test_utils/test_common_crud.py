@@ -46,7 +46,6 @@ class TestCommonCRUD:
             assert response.json['name'] == "Test"
             assert response.json['id'] == 1
 
-    @pytest.mark.xfail(raises=NotFound, reason="Expected failure for non-existing entry")
     def test_get_not_existing(self):
         with app.app_context():
             # Try to find not existing entry
@@ -69,7 +68,6 @@ class TestCommonCRUD:
             assert response.json['name'] == "Updated"
             assert response.json['id'] == 1
 
-    @pytest.mark.xfail(raises=NotFound, reason="Expected failure for non-existing entry")
     def test_put_not_existing(self):
         with app.app_context():
             # Try to find not existing entry
@@ -104,7 +102,7 @@ class TestCommonCRUD:
             assert response[1] == 204
             assert SimpleModel.query.filter_by(id=1).first() is None
 
-    @pytest.mark.xfail(raises=NotFound, reason="Expected failure for non-existing entry")
+
     def test_delete_not_existing(self):
         with app.app_context():
             # Try to find not existing entry
