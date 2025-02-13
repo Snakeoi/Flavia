@@ -5,6 +5,5 @@ from application.models import PermissionCodes
 
 
 class PermissionCodesView(views.MethodView):
-
     def get(self):
         return jsonify(PermissionCodes.LISTED)

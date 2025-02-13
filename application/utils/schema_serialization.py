@@ -6,14 +6,12 @@ from marshmallow import fields
 
 
 class UnsupportedValidatorError(Exception):
-
     def __init__(self, validator: str) -> None:
         self.message = f"unsupported validator: {type(validator)}"
         super().__init__(self.message)
 
 
 class UnsupportedFieldError(Exception):
-
     def __init__(self, validator: str) -> None:
         self.message = f"unsupported field: {type(validator)}"
         super().__init__(self.message)
@@ -120,15 +118,11 @@ def serialize_field_type(field: Any) -> str:
 
 
 def serialize_schema(schema: Schema):
-
     result = {}
     for key, value in schema.fields.items():
         if value.validate:
             if isinstance(value.validate, list):
-
-                validators = [
-                    serialize_requirements(validator)
-                    for validator in value.validate]
+                validators = [serialize_requirements(validator) for validator in value.validate]
             else:
                 validators = serialize_requirements(value.validate)
 

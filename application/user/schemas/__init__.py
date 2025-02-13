@@ -23,11 +23,7 @@ class UserReadSchema(ma.SQLAlchemySchema):
     confirmed = ma.auto_field()
     member_since = ma.auto_field()
     last_seen = ma.auto_field()
-    permissions = ma.Pluck(
-        'PermissionSchema',
-        'codename',
-        many=True
-    )
+    permissions = ma.Pluck("PermissionSchema", "codename", many=True)
 
 
 class UserCreateSchema(ma.SQLAlchemySchema):
@@ -40,49 +36,35 @@ class UserCreateSchema(ma.SQLAlchemySchema):
             validate.Length(
                 min=validators_config.Username.length.min,
                 max=validators_config.Username.length.max,
-                error=validators_config.Username.length.prompt
+                error=validators_config.Username.length.prompt,
             ),
             validate.Regexp(
-                regex=validators_config.Username.regex.pattern,
-                error=validators_config.Username.regex.prompt
-            )
-        ]
+                regex=validators_config.Username.regex.pattern, error=validators_config.Username.regex.prompt
+            ),
+        ],
     )
     email = ma.auto_field(
         required=True,
         validate=[
-            validate.Email(
-                error=validators_config.Email.email.prompt
-            ),
-            validate.Length(
-                max=validators_config.Email.length.max,
-                error=validators_config.Email.length.prompt
-            ),
-        ]
+            validate.Email(error=validators_config.Email.email.prompt),
+            validate.Length(max=validators_config.Email.length.max, error=validators_config.Email.length.prompt),
+        ],
     )
-    permissions = ma.Pluck(
-        'PermissionSchema',
-        'codename',
-        many=True,
-        required=True
-    )
+    permissions = ma.Pluck("PermissionSchema", "codename", many=True, required=True)
     password = ma.Str(
         required=True,
         validate=[
             validate.Regexp(
-                regex=validators_config.Password.regex.pattern,
-                error=validators_config.Password.regex.prompt
+                regex=validators_config.Password.regex.pattern, error=validators_config.Password.regex.prompt
             ),
             validate.Length(
                 min=validators_config.Password.length.min,
                 max=validators_config.Password.length.max,
-                error=validators_config.Password.length.prompt
-            )
-        ]
+                error=validators_config.Password.length.prompt,
+            ),
+        ],
     )
-    send_confirmation_email = ma.Bool(
-        required=True
-    )
+    send_confirmation_email = ma.Bool(required=True)
 
 
 class UserUpdateSchema(ma.SQLAlchemySchema):
@@ -94,43 +76,37 @@ class UserUpdateSchema(ma.SQLAlchemySchema):
             validate.Length(
                 min=validators_config.Username.length.min,
                 max=validators_config.Username.length.max,
-                error=validators_config.Username.length.prompt
+                error=validators_config.Username.length.prompt,
             ),
             validate.Regexp(
-                regex=validators_config.Username.regex.pattern,
-                error=validators_config.Username.regex.prompt
-            )
+                regex=validators_config.Username.regex.pattern, error=validators_config.Username.regex.prompt
+            ),
         ]
     )
     email = ma.auto_field(
         validate=[
-            validate.Email(
-                error=validators_config.Email.email.prompt
-            ),
-            validate.Length(
-                max=validators_config.Email.length.max,
-                error=validators_config.Email.length.prompt
-            ),
+            validate.Email(error=validators_config.Email.email.prompt),
+            validate.Length(max=validators_config.Email.length.max, error=validators_config.Email.length.prompt),
         ]
     )
     permissions = ma.Pluck(
-        'PermissionSchema',
-        'codename',
+        "PermissionSchema",
+        "codename",
         many=True,
     )
     password = ma.Str(
         validate=[
             validate.Regexp(
-                regex=validators_config.Password.regex.pattern,
-                error=validators_config.Password.regex.prompt
+                regex=validators_config.Password.regex.pattern, error=validators_config.Password.regex.prompt
             ),
             validate.Length(
                 min=validators_config.Password.length.min,
                 max=validators_config.Password.length.max,
-                error=validators_config.Password.length.prompt
-            )
+                error=validators_config.Password.length.prompt,
+            ),
         ]
     )
+
 
 class EmailSchema(ma.SQLAlchemySchema):
     class Meta:
@@ -139,12 +115,7 @@ class EmailSchema(ma.SQLAlchemySchema):
     email = ma.auto_field(
         required=True,
         validate=[
-            validate.Email(
-                error=validators_config.Email.email.prompt
-            ),
-            validate.Length(
-                max=validators_config.Email.length.max,
-                error=validators_config.Email.length.prompt
-            ),
-        ]
+            validate.Email(error=validators_config.Email.email.prompt),
+            validate.Length(max=validators_config.Email.length.max, error=validators_config.Email.length.prompt),
+        ],
     )

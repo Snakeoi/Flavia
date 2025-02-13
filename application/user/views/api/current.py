@@ -7,9 +7,7 @@ from application.utils import permission_required_api
 
 
 class CurrentUserView(views.MethodView):
-    decorators = [
-        permission_required_api()
-    ]
+    decorators = [permission_required_api()]
 
     def get(self):
         schema = UserReadSchema()

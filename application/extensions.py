@@ -8,10 +8,7 @@ from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
 from flask_login import LoginManager
 
-cors = CORS(
-    resources={r"/*": {"origins": "*"}},
-    supports_credentials=True
-)
+cors = CORS(resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 db = SQLAlchemy()
 
@@ -24,7 +21,7 @@ jwt = JWTManager()
 migrate = Migrate()
 
 login_manager = LoginManager()
-login_manager.login_view = 'user_auth.login'
+login_manager.login_view = "user_auth.login"
 
 
 def setup_extensions(app):

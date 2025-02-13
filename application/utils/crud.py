@@ -5,8 +5,8 @@ from flask import jsonify, abort
 from application.extensions import db
 from application.extensions import ma
 
-class CommonCRUD:
 
+class CommonCRUD:
     @classmethod
     def get_all(cls, schema: "ma.Schema", query: "db.Query"):
         return jsonify(schema.dump(query.all(), many=True))
@@ -19,14 +19,14 @@ class CommonCRUD:
         return jsonify(schema.dump(instance))
 
     @classmethod
-    def post(cls, schema: "ma.Schema", model: "db.Model", data: dict[str: Any]):
+    def post(cls, schema: "ma.Schema", model: "db.Model", data: dict[str:Any]):
         instance = model(**schema.load(data))
         db.session.add(instance)
         db.session.commit()
         return jsonify(schema.dump(instance)), 201
 
     @classmethod
-    def put(cls,  schema: "ma.Schema", query: "db.Query", data: dict[str: Any]):
+    def put(cls, schema: "ma.Schema", query: "db.Query", data: dict[str:Any]):
         instance = query.one_or_none()
         if instance is None:
             abort(404)
@@ -37,7 +37,7 @@ class CommonCRUD:
         return jsonify(schema.dump(instance))
 
     @classmethod
-    def patch(cls,  schema: "ma.Schema", query: "db.Query", data: dict[str: Any]):
+    def patch(cls, schema: "ma.Schema", query: "db.Query", data: dict[str:Any]):
         return cls.put(schema, query, data)
 
     @classmethod

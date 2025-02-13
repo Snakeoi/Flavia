@@ -12,8 +12,8 @@ from application.extensions import db, login_manager
 
 
 class PermissionCodes:
-    MANAGER = 'manager'
-    ADMIN = 'admin'
+    MANAGER = "manager"
+    ADMIN = "admin"
 
     LISTED = [
         ADMIN,
@@ -22,16 +22,16 @@ class PermissionCodes:
 
 
 class Permission(db.Model):
-    __tablename__ = 'permissions'
+    __tablename__ = "permissions"
     id = db.Column(db.Integer, primary_key=True)
     codename = db.Column(db.String(16), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
-    __table_args__ = (UniqueConstraint('user_id', 'codename', name='_user_codename_uc'),)
+    __table_args__ = (UniqueConstraint("user_id", "codename", name="_user_codename_uc"),)
 
 
 class User(UserMixin, db.Model):
-    __tablename__ = 'users'
+    __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(64), unique=True, index=True)
     username = db.Column(db.String(64), index=True)
@@ -41,18 +41,13 @@ class User(UserMixin, db.Model):
     confirmed = db.Column(db.Boolean, default=False)
     member_since = db.Column(db.DateTime(), default=datetime.utcnow)
     last_seen = db.Column(db.DateTime(), default=datetime.utcnow)
-    permissions = db.relationship(
-        'Permission',
-        backref='user',
-        lazy='dynamic',
-        cascade='all, delete-orphan'
-    )
+    permissions = db.relationship("Permission", backref="user", lazy="dynamic", cascade="all, delete-orphan")
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
 
     def __repr__(self):
-        return '<User %r>' % self.username
+        return "<User %r>" % self.username
 
     @property
     def permissions_list(self) -> list[str]:
@@ -70,7 +65,7 @@ class User(UserMixin, db.Model):
 
     @property
     def password(self):
-        raise AttributeError('password is not a readable attribute')
+        raise AttributeError("password is not a readable attribute")
 
     @password.setter
     def password(self, password):
@@ -82,16 +77,12 @@ class User(UserMixin, db.Model):
     def generate_confirmation_token(self, expiration=3600):
         additional_claims = {"confirm": True}
         expires = timedelta(seconds=expiration)
-        return create_access_token(
-            identity=self.email,
-            additional_claims=additional_claims,
-            expires_delta=expires
-        )
+        return create_access_token(identity=self.email, additional_claims=additional_claims, expires_delta=expires)
 
     def confirm(self, token):
         try:
             decoded_token = decode_token(token)
-            if decoded_token.get('confirm'):
+            if decoded_token.get("confirm"):
                 self.confirmed = True
                 return True
             else:
@@ -100,19 +91,13 @@ class User(UserMixin, db.Model):
             return False
 
     def generate_pin(self) -> str:
-        return ''.join([str(random.randint(0, 9)) for i in range(6)])
+        return "".join([str(random.randint(0, 9)) for i in range(6)])
 
     def set_reset_password_pin(self, expiration=3600):
         pin = self.generate_pin()
-        additional_claims = {
-            "pin": pin
-        }
+        additional_claims = {"pin": pin}
         expires = timedelta(seconds=expiration)
-        token = create_access_token(
-            identity=self.email,
-            additional_claims=additional_claims,
-            expires_delta=expires
-        )
+        token = create_access_token(identity=self.email, additional_claims=additional_claims, expires_delta=expires)
         self.reset_token = token
         db.session.commit()
         return pin
@@ -122,7 +107,7 @@ class User(UserMixin, db.Model):
             return False
         try:
             decoded_token = decode_token(self.reset_token)
-            if str(decoded_token['pin']) == str(pin):
+            if str(decoded_token["pin"]) == str(pin):
                 self.password = new_password
                 self.reset_token = None
                 db.session.commit()
@@ -137,8 +122,9 @@ class User(UserMixin, db.Model):
 def load_user(user_id):
     return User.query.filter_by(id=int(user_id)).first()
 
+
 class Agreement(db.Model):
-    __tablename__ = 'agreements'
+    __tablename__ = "agreements"
     id = db.Column(db.Integer, primary_key=True)
     slug = db.Column(db.String(64), unique=True, nullable=False)
     name = db.Column(db.String(64), nullable=False)

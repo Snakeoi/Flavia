@@ -15,7 +15,9 @@ def permission_required(*permissions: str):
                 return func(*args, **kwargs)
             else:
                 abort(403)
+
         return wrapper
+
     return decorator
 
 
@@ -30,7 +32,9 @@ def permission_required_api(*permissions: str):
                     return func(*args, **kwargs)
                 else:
                     abort(403)
+
         return wrapper
+
     return decorator
 
 
@@ -45,4 +49,5 @@ def handle_ma_validation_errors(func):
                 for message in messages:
                     errors.append(f"{field}: {message}")
             return jsonify({"errors": errors}), 400
+
     return wrapper

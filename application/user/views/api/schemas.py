@@ -4,12 +4,10 @@ from flask import views, jsonify
 
 
 class UserCreateSchemaView(views.MethodView):
-
     def get(self):
         return jsonify(serialize_schema(UserCreateSchema()))
 
 
 class UserUpdateSchemaView(views.MethodView):
-
     def get(self):
         return jsonify(serialize_schema(UserUpdateSchema()))

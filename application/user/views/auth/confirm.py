@@ -7,11 +7,10 @@ from application.models import User
 
 
 class ConfirmView(views.MethodView):
-
     def get(self, token):
         try:
             decoded = decode_token(token)
-            user = User.query.filter_by(email=decoded['sub']).first()
+            user = User.query.filter_by(email=decoded["sub"]).first()
             if user is None:
                 raise InvalidTokenError()
 
@@ -24,10 +23,4 @@ class ConfirmView(views.MethodView):
         except (ExpiredSignatureError, InvalidTokenError):
             success = False
 
-        return render_template(
-            'user/confirmed.html',
-            success=success
-        )
-
-
-
+        return render_template("user/confirmed.html", success=success)

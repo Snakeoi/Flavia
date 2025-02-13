@@ -3,7 +3,8 @@ import pytest
 from application import create_app
 from application.extensions import db
 
-app = create_app('testing')
+app = create_app("testing")
+
 
 @pytest.fixture
 def app_db_create_destroy():
