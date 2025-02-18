@@ -12,6 +12,8 @@
 <body>
 {% block content %}{% endblock %}
 
-{% include 'elements/cookieconsent.html' %}
+{% if not config['TESTING'] %}
+    {% include 'elements/cookieconsent.html' %}
+{% endif %}
 </body>
 </html>

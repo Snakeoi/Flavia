@@ -1,4 +1,4 @@
-from flask import views, jsonify, abort
+from flask import views, jsonify
 
 from flask_login import current_user
 

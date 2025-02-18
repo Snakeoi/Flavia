@@ -3,7 +3,6 @@ import tomllib
 
 from flask import Flask
 
-from .config import assignment
 from .extensions import setup_extensions
 from .injects import setup_injects
 from .blueprints import setup_blueprints
@@ -33,6 +32,7 @@ def create_app(mode="basic"):
         {
             "vue": ("vue",),
             "user": ("user_auth", "user_api"),
+            "agreements": ("agreements",),
         },
     )
 

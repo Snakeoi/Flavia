@@ -1,5 +1,4 @@
 import re
-import pytest
 
 from ..fixtures.app_fixtures import app
 

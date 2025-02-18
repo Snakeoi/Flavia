@@ -70,15 +70,15 @@ def serialize_requirements(validator: Any) -> dict[str, Any]:
     else:
         return serialize(validator)
 
-
+# TODO: Add support for Nested, List, Tuple, Enum, Constant, Pluck
 def serialize_field_type(field: Any) -> str:
     serializers = {
         fields.Raw: "Raw",
-        fields.Nested: "Nested",
+        # fields.Nested: "Nested",
         fields.Mapping: "Mapping",
         fields.Dict: "Dict",
-        fields.List: "List",
-        fields.Tuple: "Tuple",
+        # fields.List: "List",
+        # fields.Tuple: "Tuple",
         fields.String: "String",
         fields.UUID: "UUID",
         fields.Number: "Number",
@@ -93,7 +93,7 @@ def serialize_field_type(field: Any) -> str:
         fields.Date: "Date",
         fields.TimeDelta: "TimeDelta",
         fields.Url: "Url",
-        fields.URL: "URL",
+        fields.URL: "Url",
         fields.Email: "Email",
         fields.IP: "IP",
         fields.IPv4: "IPv4",
@@ -101,14 +101,14 @@ def serialize_field_type(field: Any) -> str:
         fields.IPInterface: "IPInterface",
         fields.IPv4Interface: "IPv4Interface",
         fields.IPv6Interface: "IPv6Interface",
-        fields.Enum: "Enum",
+        # fields.Enum: "Enum",
         fields.Method: "Method",
         fields.Function: "Function",
-        fields.Str: "Str",
-        fields.Bool: "Bool",
-        fields.Int: "Int",
-        fields.Constant: "Constant",
-        fields.Pluck: "Pluck",
+        fields.Str: "String",
+        fields.Bool: "Boolean",
+        fields.Int: "Integer",
+        # fields.Constant: "Constant",
+        # fields.Pluck: "Pluck",
     }
     serialize = serializers.get(type(field), None)
     if serialize is None:

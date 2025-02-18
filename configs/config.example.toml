@@ -1,3 +1,5 @@
+APP_NAME='Flavia'
+
 SECRET_KEY = 'v3rysecret'
 JWT_SECRET_KEY = 'v3rysecret'
 
@@ -10,3 +12,7 @@ MAIL_PASSWORD = 'password'
 MAIL_USE_TLS = false
 
 EVERYONE_CAN_REGISTER = true
+
+# Uncomment the following lines in config.test.toml
+# TESTING = true
+# WTF_CSRF_ENABLED = false

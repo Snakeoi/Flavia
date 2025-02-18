@@ -7,14 +7,14 @@ from application.user.forms import RegistrationForm
 from application.models import User
 
 
-def send_confirmation_email(email=None, user=None):
+def send_confirmation_email(email=None, user=None, email_sender_func=send_email):
     if user is None and email is None:
         raise TypeError("At least one argument cannot be None")
 
     if user is None:
         user = User.query.filter_by(email=email).first_or_404()
 
-    send_email(user.email, "Confirm your account", "user/confirm", user=user)
+    email_sender_func(user.email, "Confirm your account", "user/confirm", user=user)
 
 
 class RegisterView(views.MethodView):
@@ -41,7 +41,8 @@ class RegisterView(views.MethodView):
                 )
                 db.session.add(user)
                 db.session.commit()
-                send_confirmation_email(user=user)
+                if not current_app.config['TESTING']:
+                    send_confirmation_email(user=user)
                 flash("A confirmation email has been sent to you by email.", "info")
                 return redirect(url_for("user_auth.login"))
             else:

@@ -1,5 +1,3 @@
-from urllib import request
-
 from flask import views
 from flask import request
 
