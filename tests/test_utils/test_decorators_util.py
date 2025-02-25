@@ -1,7 +1,6 @@
 import pytest
 from werkzeug.exceptions import Forbidden
 from werkzeug.exceptions import Unauthorized
-from flask_login import UserMixin
 from flask_login import AnonymousUserMixin
 from flask_login import login_user
 from marshmallow import ValidationError
@@ -9,17 +8,9 @@ from marshmallow import ValidationError
 from application.utils.decorators import permission_required
 from application.utils.decorators import permission_required_api
 from application.utils.decorators import handle_ma_validation_errors
+from tests.mocks import MockUser
 
 from ..fixtures.app_fixtures import app
-
-
-class MockUser(UserMixin):
-    def __init__(self, permissions):
-        self.id = 1
-        self.permissions = permissions
-
-    def have_permission(self, *permissions):
-        return all(permission in self.permissions for permission in permissions)
 
 
 def test_permission_required_decorator_allows_access_to_authorized_user():

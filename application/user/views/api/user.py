@@ -1,4 +1,5 @@
 from flask import views, jsonify, request
+from flask_login import current_user
 
 from application.models import User, PermissionCodes, Permission
 from ..auth.register import send_confirmation_email
@@ -83,6 +84,11 @@ class UserView(views.MethodView, PermissionsSetupHandler):
         data: dict = UserUpdateSchema().load(request.get_json())
         user: "User" = User.query.get_or_404(user_id)
 
+        if 'permissions' in data.keys():
+            permission_codes = self.list_permission_codes(data["permissions"])
+            if PermissionCodes.ADMIN not in permission_codes:
+                return jsonify({"errors": ["You cannot remove admin permission from yourself."]}), 400
+
         for key in data.keys():
             if key == "permissions":
                 self.add_permissions(user, data["permissions"])
@@ -94,6 +100,9 @@ class UserView(views.MethodView, PermissionsSetupHandler):
         return jsonify(UserReadSchema().dump(user))
 
     def delete(self, user_id):
-        db.session.delete(User.query.get_or_404(user_id))
+        user = User.query.get_or_404(user_id)
+        if user_id == current_user.id:
+            return jsonify({"errors": ["You cannot delete yourself."]}), 400
+        db.session.delete(user)
         db.session.commit()
         return jsonify(), 204
