@@ -42,8 +42,8 @@ class ResetPasswordView(views.MethodView):
 
         user = User.query.filter_by(email=form.email.data.lower()).first()
         if user is None:
-            return flash("No email found.", "warning")
-        if form.validate_on_submit():
+            flash("No email found.", "warning")
+        elif form.validate_on_submit():
             if user.reset_password(pin=form.pin.data, new_password=form.password.data):
                 flash("Password has been changed.", "success")
                 return redirect(url_for("user_auth.login"))

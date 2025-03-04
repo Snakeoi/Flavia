@@ -6,13 +6,20 @@ from application.mailer import send_email
 from application.user.forms import RegistrationForm
 from application.models import User
 
+def sender_mock(*args, **kwargs):
+    pass
 
-def send_confirmation_email(email=None, user=None, email_sender_func=send_email):
+def send_confirmation_email(email=None, user=None):
     if user is None and email is None:
         raise TypeError("At least one argument cannot be None")
 
     if user is None:
         user = User.query.filter_by(email=email).first_or_404()
+
+    if current_app.config["TESTING"]:
+        email_sender_func = sender_mock
+    else:
+        email_sender_func = send_email
 
     email_sender_func(user.email, "Confirm your account", "user/confirm", user=user)
 

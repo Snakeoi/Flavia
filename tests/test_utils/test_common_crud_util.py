@@ -21,10 +21,15 @@ class SimpleSchema(ma.SQLAlchemySchema):
 
 
 class TestCommonCRUD:
+
     def setup_method(self):
         with app.app_context():
             db.drop_all()
             db.create_all()
+
+    def teardown_method(self):
+        with app.app_context():
+            db.drop_all()
 
     def test_get_all(self):
         with app.app_context():
@@ -120,7 +125,3 @@ class TestCommonCRUD:
                 "If you entered the URL manually please check your spelling "
                 "and try again."
             )
-
-    def teardown_method(self):
-        with app.app_context():
-            db.drop_all()

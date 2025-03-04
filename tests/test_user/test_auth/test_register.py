@@ -3,27 +3,21 @@ from flask import current_app
 from werkzeug.exceptions import NotFound
 
 from tests.fixtures.app_fixtures import app
+from tests.fixtures.app_fixtures import DatabaseCreateDropFixture
 
 from application.models import User
 from application.extensions import db
 from application.user.views.auth.register import send_confirmation_email
 
-def send_email_mock(email, subject, template, **kwargs):
-    pass
 
-class TestSendConfirmationEmail:
-
-    def setup_method(self):
-        with app.app_context():
-            db.create_all()
+class TestSendConfirmationEmail(DatabaseCreateDropFixture):
 
     def test_send_confirmation_email_raises_type_error_if_user_and_email_are_both_none(self):
         with app.app_context():
             with pytest.raises(TypeError):
                 send_confirmation_email(
                     user=None,
-                    email=None,
-                    email_sender_func=send_email_mock
+                    email=None
                 )
 
     def test_send_confirmation_email_raises_not_found_error_while_user_by_email_not_exist(self):
@@ -31,7 +25,6 @@ class TestSendConfirmationEmail:
             with pytest.raises(NotFound):
                 send_confirmation_email(
                     email='not_existing_buddy@example.com',
-                    email_sender_func=send_email_mock
                 )
 
     def test_send_confirmation_email_sends_email_to_user_email_by_email(self):
@@ -44,7 +37,6 @@ class TestSendConfirmationEmail:
 
             send_confirmation_email(
                 email='buddy@example.com',
-                email_sender_func=send_email_mock
             )
 
     def test_send_confirmation_email_sends_email_to_user_email_by_user_object(self):
@@ -57,12 +49,7 @@ class TestSendConfirmationEmail:
 
             send_confirmation_email(
                 user=User,
-                email_sender_func=send_email_mock
             )
-
-    def teardown_method(self):
-        with app.app_context():
-            db.drop_all()
 
 def test_everyone_can_register_is_off_returns_404():
     with app.test_request_context():
@@ -83,6 +70,10 @@ class TestPost:
     def setup_method(self):
         with app.app_context():
             db.create_all()
+
+    def teardown_method(self):
+        with app.app_context():
+            db.drop_all()
 
     def test_post_with_existing_email_shows_error(self):
         with app.test_request_context():
@@ -107,7 +98,3 @@ class TestPost:
             with app.test_client() as client:
                 response = client.post("/user/register", data={"email": "invalid", "username": "", "password": "as1EDF^&(HHG>", "password2": "as1EDF^&(HHG>"})
                 assert b"Must be valid email address." in response.data
-
-    def teardown_method(self):
-        with app.app_context():
-            db.drop_all()

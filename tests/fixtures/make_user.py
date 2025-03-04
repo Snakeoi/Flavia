@@ -1,6 +1,7 @@
 from application.models import User, PermissionCodes, Permission
 from application.extensions import db
 
+
 def add_permissions(user: "User", permission_codes: list[str]):
     for permission in permission_codes:
         if permission in PermissionCodes.LISTED and permission not in user.permissions_list:
@@ -11,8 +12,11 @@ def add_permissions(user: "User", permission_codes: list[str]):
                 )
             )
 
-def make_user(email="john.doe@example.com", username="John Doe", password="P@ssw0rd", permissions=[]):
 
+def make_user(email: str = "john.doe@example.com", username: str = "John Doe", password: str = "P@ssw0rd",
+              permissions: list | None = None):
+    if permissions is None:
+        permissions = list()
     user: "User" = User(email=email.lower(), username=username, password=password)
     db.session.add(user)
     db.session.commit()

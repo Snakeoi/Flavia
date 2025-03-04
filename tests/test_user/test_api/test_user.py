@@ -1,15 +1,12 @@
 from flask_login import login_user
 
 from application.models import User
+from tests.fixtures.app_fixtures import DatabaseCreateDropFixture
 from tests.fixtures.make_user import make_user
-from ...fixtures.app_fixtures import app
-from application.extensions import db
+from tests.fixtures.app_fixtures import app
 
-class TestCommonCRUD:
-    def setup_method(self):
-        with app.app_context():
-            db.drop_all()
-            db.create_all()
+
+class TestCommonCRUD(DatabaseCreateDropFixture):
 
     def test_get_all_users_returns_list_of_users(self):
         with app.test_request_context():
